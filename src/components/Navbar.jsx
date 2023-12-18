@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import { useCart } from './ContextReducer';
+import { useAuth } from './AuthContext'
 
 
 export default function Navbar() {
-    const [cartview, setcartview] = useState(false);
-
     let navigate = useNavigate()
+    const {  logout } = useAuth();
+
+    const handleLogout = () => {
+        localStorage.removeItem("authToken2");
+        localStorage.removeItem("user_id");
+        logout();
+        navigate("/");
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -29,10 +35,10 @@ export default function Navbar() {
 
                         {!localStorage.getItem("authToken2") ? <div className='d-flex'>
                             <Link className="mx-2 btn bg-white text-success" to="/login">Login</Link>
-                            <Link className="mx-2 btn bg-white text-success" to="/signup">Signup</Link>
+                            <Link className="mx-2 btn bg-white text-success" to="/register">Signup</Link>
                         </div>
                             :
-                            ""
+                            <div className="mx-2 btn bg-white text-danger" onClick={handleLogout}>Logout</div>
                         }
                     </div>
                 </div>

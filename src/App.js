@@ -1,16 +1,14 @@
-import Login from './screens/Login';
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom';
-import Register from './screens/Register';
-import Home from './screens/Home';
+import Login from "./screens/Login";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from "./screens/Register";
+import Home from "./screens/Home";
+import { AuthProvider } from "./components/AuthContext";
 
 function App() {
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
         <div>
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -18,7 +16,8 @@ function App() {
             <Route exact path="/register" element={<Register />} />
           </Routes>
         </div>
-      </Router >
+      </Router>
+    </AuthProvider>
   );
 }
 

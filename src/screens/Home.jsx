@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar';
 import Card from '../components/Card';
+import { useAuth } from '../components/AuthContext';
 // import Footer from '../components/Footer';
 // import Card from '../components/Card';
 
 export default function Home() {
+    const { isLoggedIn} = useAuth();
     return (
         <div>
             <Navbar />
@@ -12,7 +14,8 @@ export default function Home() {
                 <div className="carousel-inner" id="carousel">
                     <div className="carousel-caption" style={{ zIndex: "10" }}>
                         <div className="d-flex" style={{alignContent:'center', justifyContent:'center', alignSelf:'center', textAlign:'center', position:'relative', bottom:'50vh', transform:'translateY(50%)'}}>
-                            <Card/>
+                            
+                            {isLoggedIn?<Card/>:null}
                             {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" /> */}
                             {/* <button className="btn btn-success" type="submit">Search</button> */}
                         </div>

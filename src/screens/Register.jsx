@@ -11,6 +11,8 @@ export default function Register() {
     age: "",
   });
 
+  var errormsg = "";
+
   function onChange(event) {
     setCredentials({
       ...Credentials,
@@ -20,33 +22,27 @@ export default function Register() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await fetch(
-      "https://foodie-api-7tq3.onrender.com/api/createuser",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name: Credentials.name,
-          email: Credentials.email,
-          password: Credentials.password,
-          location: Credentials.age,
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:4000/api/createuser", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: Credentials.name,
+        email: Credentials.email,
+        password: Credentials.password,
+        age: Credentials.age,
+      }),
+    });
 
-    const json = await response.json();
-    const userRegistered = json.success;
-
-    if (userRegistered) {
+    if (response.status === 201) {
       setCredentials({
         name: "",
         email: "",
         password: "",
         age: "",
       });
-      toast.success("Registered Successfully", {
+      toast.success("Registered Successfully, Log in", {
         position: "bottom-left",
         autoClose: 2000,
         hideProgressBar: false,
@@ -56,8 +52,15 @@ export default function Register() {
         progress: undefined,
         theme: "light",
       });
-    } else {
-      toast.error("Failed!", {
+    }
+    else{
+      if(response.status===400){
+        errormsg="User already registered, Log In";
+      }
+      else{
+        errormsg = "Internal server Error";
+      }
+      toast.error(errormsg, {
         position: "bottom-left",
         autoClose: 2000,
         hideProgressBar: false,
