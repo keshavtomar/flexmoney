@@ -38,7 +38,7 @@ export default function Enrollment() {
       alert("Please Login first");
       return;
     } else {
-      const response = await fetch("http://localhost:4000/api/enrolluser", {
+      const response = await fetch("https://flexmoney-api.onrender.com/api/enrolluser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function Enrollment() {
   };
 
   const checkPayment = async () => {
-    const response = await fetch("http://localhost:4000/api/checkpayment", {
+    const response = await fetch("https://flexmoney-api.onrender.com/api/checkpayment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

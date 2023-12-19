@@ -24,7 +24,7 @@ export default function Card() {
   }
 
   const checkPayment = async () => {
-    const response = await fetch("http://localhost:4000/api/checkpayment", {
+    const response = await fetch("https://flexmoney-api.onrender.com/api/checkpayment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

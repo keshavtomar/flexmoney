@@ -73,7 +73,7 @@ export default function History() {
 
   useEffect(() => {
     const checkPayment = async () => {
-      const response = await fetch("http://localhost:4000/api/userstatus", {
+      const response = await fetch("https://flexmoney-api.onrender.com/api/userstatus", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
