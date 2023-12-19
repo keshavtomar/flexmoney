@@ -5,6 +5,7 @@ import Register from "./screens/Register";
 import Home from "./screens/Home";
 import Enrollment from "./screens/Enrollment"
 import { AuthProvider } from "./components/AuthContext";
+import History from "./screens/History";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/payment" element={<Enrollment />} />
+            <Route exact path="/myOrder" element={<History />} />
           </Routes>
         </div>
       </Router>

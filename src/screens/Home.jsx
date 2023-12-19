@@ -7,6 +7,9 @@ import { useAuth } from '../components/AuthContext';
 
 export default function Home() {
     const { isLoggedIn} = useAuth();
+
+
+    
     return (
         <div>
             <Navbar />

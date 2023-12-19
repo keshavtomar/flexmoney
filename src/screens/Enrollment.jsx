@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../components/AuthContext';
+import { useAuth } from "../components/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Enrollment() {
-    const { isLoggedIn} = useAuth();
+  const { isLoggedIn } = useAuth();
+  const [paidstatus, setpaidstatus] = useState(true);
 
   const navigate = useNavigate();
 
@@ -29,25 +31,56 @@ export default function Enrollment() {
     if (!isConfirmationChecked) {
       alert("Please agree to the confirmation");
       return;
-    }
-    else if(!isLoggedIn){
-        alert("Please Login first");
-        return;
-    }
-     else {
+    } else if (!isLoggedIn) {
+      alert("Please Login first");
+      return;
+    } else {
       const response = await fetch("http://localhost:4000/api/enrolluser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id:localStorage.getItem("user_id"),
-          batch:selectedBatch
+          user_id: localStorage.getItem("user_id"),
+          batch: selectedBatch,
         }),
       });
-      console.log(response);
+      if (response.status === 200) {
+        navigate("/");
+      } else {
+        toast.error("Error in payment", {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
   };
+
+  const checkPayment = async () => {
+    const response = await fetch("http://localhost:4000/api/checkpayment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user_id"),
+      }),
+    });
+    const x = await response.json();
+    console.log(x);
+    console.log(x.nextdue);
+    setpaidstatus(x.paid);
+  };
+
+  useEffect(()=>{
+    checkPayment();
+  },[])
 
   return (
     <div>
@@ -114,13 +147,24 @@ export default function Enrollment() {
                   </div>
 
                   <div className="form-button mt-3">
-                    <button
-                      id="submit"
-                      type="submit"
-                      className="btn btn-primary"
-                    >
-                      Make Payment
-                    </button>
+                    {paidstatus ? (
+                      <button
+                        id="submit"
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled
+                      >
+                      Paid Already
+                      </button>
+                    ) : (
+                      <button
+                        id="submit"
+                        type="submit"
+                        className="btn btn-primary"
+                      >
+                        Make Payment
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
