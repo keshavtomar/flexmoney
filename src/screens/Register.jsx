@@ -60,7 +60,14 @@ export default function Register() {
     } else {
       if (response.status === 400) {
         errormsg = "User already registered, Log In";
-      } else {
+      } 
+      else if(response.status === 601){
+        errormsg = "Password should be minimum 6 characters";
+      }
+      else if(response.status===602){
+        errormsg = "Enter a valid email";
+      }
+      else {
         errormsg = "Internal server Error";
       }
       toast.error(errormsg, {

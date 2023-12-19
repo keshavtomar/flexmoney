@@ -7,16 +7,23 @@ const formatDate = (inputDate) => {
   const day = date.getDate();
   const month = date.getMonth() + 1; // Month is zero-based, so add 1
   const year = date.getFullYear();
-  return `${day < 10 ? '0' : ''}${day}-${month < 10 ? '0' : ''}${month}-${year}`;
+  return `${day < 10 ? "0" : ""}${day}-${
+    month < 10 ? "0" : ""
+  }${month}-${year}`;
 };
 
 const PaymentTable = ({ payments }) => {
-    const tableStyle = { margin: 'auto',marginTop:'20px' };
-    const thBorderStyle = { borderBottom: '1px solid #ffffff' };
-    const columnStyle = { paddingRight:'10px',paddingLeft:'10px',marginRight: '20px', color:'white' };
+  const tableStyle = { margin: "auto", marginTop: "20px" };
+  const thBorderStyle = { borderBottom: "1px solid #ffffff" };
+  const columnStyle = {
+    paddingRight: "10px",
+    paddingLeft: "10px",
+    marginRight: "20px",
+    color: "white",
+  };
   return (
     <div>
-      <h2 style={{color:'white'}}>Payment Table</h2>
+      <h2 style={{ color: "white" }}>Payment Table</h2>
       <table border="1" style={tableStyle}>
         <thead>
           <tr style={thBorderStyle}>
@@ -32,7 +39,25 @@ const PaymentTable = ({ payments }) => {
               <td style={columnStyle}>{index + 1}</td>
               <td style={columnStyle}>{payment.amount}</td>
               <td style={columnStyle}>{formatDate(payment.payment_date)}</td>
-              <td style={columnStyle}>{payment.class_id===1?<div>6-7 AM</div>:<div>{payment.class_id===2?<div>7-8 AM</div>:<div>{payment.class_id===3?<div>8-9 AM</div>:<div>5-6 PM</div>}</div>}</div>}</td>
+              <td style={columnStyle}>
+                {payment.class_id === 1 ? (
+                  <div>6-7 AM</div>
+                ) : (
+                  <div>
+                    {payment.class_id === 2 ? (
+                      <div>7-8 AM</div>
+                    ) : (
+                      <div>
+                        {payment.class_id === 3 ? (
+                          <div>8-9 AM</div>
+                        ) : (
+                          <div>5-6 PM</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -72,11 +97,21 @@ export default function History() {
     <div>
       <Navbar />
       {!isLoggedIn ? (
-        <div>Please Login to check</div>
+        <div>
+          <div>Please Login to check</div>
+        </div>
       ) : (
         <div>
           {history ? (
-            <div style={{textAlign:"center",alignContent:'center', alignItems:"center", marginTop:'10px', padding:'auto'}}>
+            <div
+              style={{
+                textAlign: "center",
+                alignContent: "center",
+                alignItems: "center",
+                marginTop: "10px",
+                padding: "auto",
+              }}
+            >
               <PaymentTable payments={payments} />
             </div>
           ) : (
@@ -87,7 +122,6 @@ export default function History() {
     </div>
   );
 }
-
 
 // import React from 'react';
 
