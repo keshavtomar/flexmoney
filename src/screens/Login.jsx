@@ -20,6 +20,9 @@ export default function Login() {
       [event.target.name]: event.target.value,
     });
   }
+  const handleReturn = () => {
+    navigate("/");
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -47,11 +50,11 @@ export default function Login() {
         password: "",
       });
       if (response.status === 403) {
-        errormsg="Email does not exist";
+        errormsg = "Email does not exist";
       } else if (response.status === 401) {
-        errormsg="Password does not match";
+        errormsg = "Password does not match";
       } else {
-        errormsg="Internal server error";
+        errormsg = "Internal server error";
       }
       toast.error(errormsg, {
         position: "bottom-left",
@@ -68,6 +71,12 @@ export default function Login() {
 
   return (
     <div>
+      <button
+        onClick={handleReturn}
+        style={{ position: "absolute", bottom: "10px", borderRadius: "20px" }}
+      >
+        Back to home
+      </button>
       <ToastContainer />
       <section className="forms-section">
         <div className="forms">

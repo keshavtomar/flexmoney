@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [Credentials, setCredentials] = useState({
@@ -19,6 +20,10 @@ export default function Register() {
       [event.target.name]: event.target.value,
     });
   }
+  const navigate = useNavigate();
+  const handleReturn = () => {
+    navigate("/");
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -52,12 +57,10 @@ export default function Register() {
         progress: undefined,
         theme: "light",
       });
-    }
-    else{
-      if(response.status===400){
-        errormsg="User already registered, Log In";
-      }
-      else{
+    } else {
+      if (response.status === 400) {
+        errormsg = "User already registered, Log In";
+      } else {
         errormsg = "Internal server Error";
       }
       toast.error(errormsg, {
@@ -75,6 +78,12 @@ export default function Register() {
 
   return (
     <div>
+      <button
+        onClick={handleReturn}
+        style={{ position: "absolute", bottom: "10px", borderRadius: "20px" }}
+      >
+        Back to home
+      </button>
       <section className="forms-section">
         <ToastContainer />
         <div className="forms">
