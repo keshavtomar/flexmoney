@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+Installation
+use git clone <link> to clone it in your system and then install all dependencies using command "npm i"
+use command "npm start" to start the localhost server on server 3000
+This is a frontend application only and hence it will work in coordination of a backend repository at link
+https://github.com/keshavtomar/flexmoney-backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Used technologies
+Database - cockroachDB
+Frontend - React
+Backend - Node.js with prisma 
+- all other npm libraries are stated in package.json
 
-In the project directory, you can run:
+App.js Documentation
+App.js is the main entry point of the application. It sets up the routing for the application and wraps the entire application in the AuthProvider context.
 
-### `npm start`
+Imports
+Login, Register, Home, Enrollment, History: These are the different screens or pages of the application.
+BrowserRouter as Router, Routes, Route: These are components from react-router-dom used for routing in the application.
+AuthProvider: This is a context provider for authentication. It wraps the entire application so that any component can access the authentication context.
+Function: App
+This is the main function component of the file. It returns the JSX for the application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+JSX Structure
+AuthProvider: This wraps the entire application. It provides an authentication context to all the components inside it.
+Router: This component from react-router-dom wraps all the Routes and Route components. It provides the routing functionality.
+Routes: This component wraps all the Route components. It's where you define all the possible routes for the application.
+Route: These components define individual routes. Each Route has an exact path prop which is the URL for that route, and an element prop which is the component that should be rendered when that URL is visited.
+Routes
+/: The home page of the application.
+/login: The login page of the application.
+/register: The registration page of the application.
+/payment: The payment or enrollment page of the application.
+/history: The order history page of the application.
+Export
+The App component is exported as the default export of this module.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Home page
+Home.jsx is a component that represents the home page of the application.
 
-### `npm run build`
+Imports
+React, { useEffect, useState }: These are imports from the react library. React is the main library, while useEffect and useState are hooks that allow you to use state and other React features without writing a class.
+Navbar: This is a component that represents the navigation bar of the application.
+Card: This is a component that represents a card element in the application.
+useAuth: This is a custom hook that provides authentication context. It allows you to access the isLoggedIn state and other authentication-related states and functions.
+Function: Home
+This is the main function component of the file. It uses the useAuth hook to get the isLoggedIn state, which can be used to conditionally render different parts of the component based on whether the user is logged in or not.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+JSX Structure
+<div>: This is the main container for the component. All other elements will be nested inside this.
+Export
+The Home component is exported as the default export of this module.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Note: The code provided is incomplete, so the documentation might not cover all aspects of the Home.jsx file.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img width="960" alt="image" src="https://github.com/keshavtomar/flexmoney/assets/100251921/e6d3105d-99c7-4356-9bd8-73239f2f95d5">
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Login/Register page:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Security is taken care of in login and Register
+<img width="960" alt="image" src="https://github.com/keshavtomar/flexmoney/assets/100251921/0c85c8e5-f9f2-4a47-9837-205136e19dd5">
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Enrolloment for current month:
+This is handled by enroll button which will take you to route /payment
+The age factor is filtered during the current month payment because DOB of user is saved in the database and age is a dynamic variable
+<img width="960" alt="image" src="https://github.com/keshavtomar/flexmoney/assets/100251921/169ee9a7-530a-4a85-99b7-2fb32ea67aa4">
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+My History:
+History of previous batches taken can be seen at the route /history after login
+<img width="960" alt="image" src="https://github.com/keshavtomar/flexmoney/assets/100251921/b04bd58d-08c2-48e6-8a68-defaba63c26c">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Current batch status:
+<img width="232" alt="image" src="https://github.com/keshavtomar/flexmoney/assets/100251921/b004eb56-6fa0-48ac-bb1b-7ec1d6202074">
 
-### Code Splitting
+Thank You for Reading ...
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
