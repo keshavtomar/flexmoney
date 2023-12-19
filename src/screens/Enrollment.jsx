@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Enrollment() {
   const { isLoggedIn } = useAuth();
@@ -46,8 +48,21 @@ export default function Enrollment() {
           batch: selectedBatch,
         }),
       });
+      console.log(response);
       if (response.status === 200) {
         navigate("/");
+      } else if (response.status === 205) {
+        console.log("Age not eligible");
+        toast.error("Age not eligible (should be 18-60)", {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
         toast.error("Error in payment", {
           position: "bottom-left",
@@ -85,6 +100,7 @@ export default function Enrollment() {
 
   return (
     <div>
+      <ToastContainer position="bottom-left" autoClose={2000} />
       {!isLoggedIn ? (
         <div style={{ color: "white", textAlign: "center" }}>
           <button
@@ -93,7 +109,7 @@ export default function Enrollment() {
               position: "absolute",
               bottom: "10px",
               borderRadius: "20px",
-              transform:'translateX(-50%)'
+              transform: "translateX(-50%)",
             }}
           >
             Back to home

@@ -67,6 +67,9 @@ export default function Register() {
       else if(response.status===602){
         errormsg = "Enter a valid email";
       }
+      else if(response.status===101){
+        errormsg = "Age should be 18-60"
+      }
       else {
         errormsg = "Internal server Error";
       }
@@ -177,12 +180,12 @@ export default function Register() {
                   />
                 </div>
                 <div className="input-block">
-                  <label htmlFor="signup-location">Age</label>
+                  <label htmlFor="signup-location">Date of Birth</label>
                   <input
                     name="age"
                     value={Credentials.age}
                     id="signup-location"
-                    type="text"
+                    type="date"
                     required
                     onChange={onChange}
                   />
