@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./screens/Register";
 import Home from "./screens/Home";
-import Enrollment from "./screens/Enrollment"
+import Enrollment from "./screens/Enrollment";
 import { AuthProvider } from "./components/AuthContext";
 import History from "./screens/History";
 
@@ -17,7 +17,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/payment" element={<Enrollment />} />
-            <Route exact path="/myOrder" element={<History />} />
+            <Route exact path="/history" element={<History />} />
           </Routes>
         </div>
       </Router>
